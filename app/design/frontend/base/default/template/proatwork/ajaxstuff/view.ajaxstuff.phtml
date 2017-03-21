@@ -1,0 +1,15 @@
+<script type="text/javascript">
+/**
+ * TODO Fix this so it works with URL on btn;
+ * @type {function(this:(productAddToCartForm|*))}
+ */
+    productAddToCartForm.submit = function(button, url) {
+        if (this.validator.validate()) {
+            var form = this.form;
+            var formURL = form.action;
+            var data = form.serialize(true);
+            var addToCartURL = url ? url : formURL;
+            Ajaxstuff.Cart.makeRequest(addToCartURL, data, "button.btn-cart");
+        }
+    }
+</script>

@@ -1,0 +1,4 @@
+app/code/local/Proatwork/Ajaxstuff
+app/etc/modules/Proatwork_Ajaxstuff.xml
+app/design/frontend/base/default/template/proatwork/ajaxstuff
+app/design/frontend/base/default/layout/proatwork_ajaxstuff.xml

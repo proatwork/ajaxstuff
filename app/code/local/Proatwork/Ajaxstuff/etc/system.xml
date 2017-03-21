@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <tabs>
+        <proatwork_ajaxstuff translate="label" module="proatwork_ajaxstuff">
+            <label>Proatwork's AjaxStuff</label>
+            <sort_order>1</sort_order>
+        </proatwork_ajaxstuff>
+    </tabs>
+    <sections>
+        <ajaxstuff translate="label" module="proatwork_ajaxstuff">
+            <label>Settings</label>
+            <tab>proatwork_ajaxstuff</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>1</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <settings translate="label">
+                    <label>Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <expanded>1</expanded>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <general_heading translate="label">
+                            <label>General</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </general_heading>
+                        <enable>
+                            <label>Enable Proatwork_Ajaxstuff</label>
+                            <comment><![CDATA[Use Ajax awesomeness when adding to cart, making your customers squeal with joy]]></comment>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </enable>
+                        <minicart_heading translate="label">
+                            <label>Minicart</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </minicart_heading>
+                        <minicart translate="comment">
+                            <label>Please specify in which container should the blocks (returned by ajax) go</label>
+                            <frontend_model>proatwork_ajaxstuff/adminhtml_selectors</frontend_model>
+                            <backend_model>proatwork_ajaxstuff/system_config_backend_json</backend_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <can_be_empty>1</can_be_empty>
+                            <comment><![CDATA[<strong>Brotip</strong>: <em>Checking the developer console will usually tell you if there is something wrong after an AJAX call.</em>]]></comment>
+                        </minicart>
+                        <ajaxcart_after>
+                            <label>JS to run after AJAX finished</label>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <frontend_type>textarea</frontend_type>
+                            <comment><![CDATA[<strong>Brotip</strong>: <em>Use this to re-bind your minicart dropdown or to show the minicart</em>]]></comment>
+                        </ajaxcart_after>
+                    </fields>
+                </settings>
+            </groups>
+        </ajaxstuff>
+    </sections>
+</config>

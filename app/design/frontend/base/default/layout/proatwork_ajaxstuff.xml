@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="before_body_end">
+            <block type="core/template" name="list.ajaxstuff" template="proatwork/ajaxstuff/list.ajaxstuff.phtml" />
+        </reference>
+    </default>
+    <catalog_product_view>
+        <reference name="before_body_end">
+            <block type="core/template" name="view.ajaxstuff" template="proatwork/ajaxstuff/view.ajaxstuff.phtml" />
+        </reference>
+    </catalog_product_view>
+</layout>

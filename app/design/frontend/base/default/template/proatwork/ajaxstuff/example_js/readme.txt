@@ -1,0 +1,1 @@
+Just search for "skipLinksF()" inside app.js and minicart.js to make it more clear what you need to change.

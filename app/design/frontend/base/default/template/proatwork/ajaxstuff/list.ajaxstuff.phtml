@@ -1,0 +1,93 @@
+<script type="text/javascript">	
+    var Ajaxstuff;
+    Ajaxstuff = {
+        css_selectors : <?php echo $this->helper('proatwork_ajaxstuff')->getCSSSelectors(); ?>,
+        Spinner : {
+            start: function(button){
+                jQuery(button).prop('disabled', true).fadeTo(200, 0.5).addClass('ajax-adding');
+            },
+            stop: function(button){
+                jQuery(button).prop('disabled', false).fadeTo(200, 1).removeClass('ajax-adding');
+            }
+        },
+        placeBlocks: function(blocks){
+            jQuery.each(blocks, function(block_name, block_content){
+                var selectors = jQuery(Ajaxstuff.css_selectors[block_name]);
+                jQuery(selectors).each(function(index, selector){
+                    jQuery(selector).html(block_content);
+                });
+            });
+            this.afterPlaceBlocks();
+        },
+        errorOut: function(error){
+            console.info(error);
+            // alert(error.replace(/<(?:.|\n)*?>/gm, ''));
+        },
+        addMessage : function(message){
+            alert(message);
+        },
+        afterPlaceBlocks : function(){
+            setTimeout(function(){
+                <?php echo $this->helper('proatwork_ajaxstuff')->afterAJAXCart(); ?>
+            }, 500);
+        },
+        Cart : {
+            cartControllerURL : '<?php echo Mage::getUrl('ajaxstuff/cart/add/'); ?>',
+            start : function(){
+                this.bindOnList();
+            },
+            bindOnList : function() {
+                var self = this;
+                var elements = jQuery('li.item .actions .btn-cart');
+                elements.each(function(index, element) {
+                    this.onclick = function (event) {
+                        return false;
+                    };
+                    this.on('click', function(){
+                        var button = this;
+                        var addToCartURL = jQuery(element).attr('onclick');
+                            addToCartURL = addToCartURL.split('\'')[1];
+                        self.makeRequest(addToCartURL, {}, button);
+                    });
+                });
+            },
+            makeRequest : function(url, data, button){
+                Ajaxstuff.Spinner.start(button);
+                jQuery.ajax({
+                    url: url,
+                    data : data,
+                    dataType: 'json',
+                    type : 'POST',
+                    success: function(data){
+                        if(!data){
+                            console.info('Something went wrong');
+                            return;
+                        }
+                        if(data.status == 'ERROR'){ //we made a booboo
+                            Ajaxstuff.errorOut(data.message);
+                            return;
+                        }
+                        if(data.blocks){
+                            Ajaxstuff.placeBlocks(data.blocks);
+                            if(jQuery(window).width() < 771){
+	                            //skipLinksF(); <-- this is the skip links function you're going to create in rwd's app.js (check the demo js)
+                            }
+                            
+
+                        }
+                        Ajaxstuff.addMessage(data.message);
+                    },
+                    error : function(data){
+                        Ajaxstuff.errorOut(data);
+                    },
+                    complete : function(){
+                        Ajaxstuff.Spinner.stop(button);
+                    }
+                });
+            }
+        }
+    };
+    jQuery(document).ready(function(){
+        Ajaxstuff.Cart.start();
+    });
+</script>
